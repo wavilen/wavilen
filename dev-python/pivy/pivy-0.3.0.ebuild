@@ -12,7 +12,7 @@ SRC_URI="http://pivy.coin3d.org/download/pivy/releases/${PV}/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=">=media-libs/coin-2.4.5

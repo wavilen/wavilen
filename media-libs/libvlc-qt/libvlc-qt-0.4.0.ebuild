@@ -12,7 +12,7 @@ SRC_URI="mirror://sourceforge/${PN/lib/}/VLC-Qt/${PV}/${PN}_${PV}_src.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="

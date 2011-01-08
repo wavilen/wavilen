@@ -10,7 +10,7 @@ SRC_URI="http://launchpad.net/${PN}/trunk/0.8/+download/xorg-input-${P}.tar.gz"
 S="${WORKDIR}/xorg-input-${P}"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="x11-base/xorg-server"

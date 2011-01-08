@@ -10,7 +10,7 @@ SRC_URI="http://launchpad.net/xsplash/trunk/0.8.5/+download/${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="gnome-base/gdm"

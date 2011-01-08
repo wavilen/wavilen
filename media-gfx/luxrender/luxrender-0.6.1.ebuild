@@ -14,7 +14,7 @@ SRC_URI="http://src.luxrender.net/lux/archive/${EHG_REVISION}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="sse2 doc debug blender"
 
 RDEPEND=">=dev-libs/boost-1.37

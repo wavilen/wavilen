@@ -9,7 +9,7 @@ SRC_URI="http://launchpad.net/rapid/trunk/${PV}/+download/${PF}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE="video"
 
 RDEPEND=">=dev-lang/python-2.5

@@ -14,7 +14,7 @@ SRC_URI="mirror://sourceforge/${PN}/${PN}-src/v${PV}/${PN}-src-v${PV}.zip"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 
 IUSE=""
 

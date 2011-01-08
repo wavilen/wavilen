@@ -15,7 +15,7 @@ SRC_URI="http://dazuko.dnsalias.org/files/${MY_P}.tar.gz"
 
 SLOT="2.6.34"
 LICENSE="GPL-2 BSD"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="=virtual/linux-sources-2.6.34*"
