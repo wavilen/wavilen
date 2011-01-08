@@ -1,0 +1,11 @@
+--- m4/ax_boost_base-fixed.m4	2008-10-05 04:41:53.000000000 +0300
++++ m4/ax_boost_base-fixed.m4	2010-01-15 21:23:35.000000000 +0200
+@@ -89,7 +89,7 @@
+ 	dnl or if you install boost with RPM
+ 	if test "$ac_boost_path" != ""; then
+ 		BOOST_LDFLAGS="-L$ac_boost_path/lib"
+-		BOOST_CPPFLAGS="-I$ac_boost_path/include"
++		BOOST_CPPFLAGS="-I$ac_boost_path"
+ 	else
+ 		for ac_boost_path_tmp in /usr /usr/local /opt /opt/local ; do
+ 			if test -d "$ac_boost_path_tmp/include/boost" && test -r "$ac_boost_path_tmp/include/boost"; then

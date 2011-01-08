@@ -1,0 +1,33 @@
+--- /usr/portage/net-libs/rb_libtorrent/rb_libtorrent-0.14.6.ebuild	2009-11-10 18:36:23.000000000 +0000
++++ rb_libtorrent-0.14.6-r1.ebuild	2009-12-02 17:49:24.000000000 +0000
+@@ -3,7 +3,7 @@
+ # $Header: /var/cvsroot/gentoo-x86/net-libs/rb_libtorrent/rb_libtorrent-0.14.6.ebuild,v 1.3 2009/11/10 18:21:58 yngwin Exp $
+ 
+ EAPI="2"
+-inherit autotools eutils flag-o-matic
++inherit autotools eutils flag-o-matic versionator
+ 
+ MY_P=${P/rb_/}
+ MY_P=${MY_P/torrent/torrent-rasterbar}
+@@ -32,6 +32,12 @@
+ }
+ 
+ src_configure() {
++	BOOST_PKG="$(best_version ">=dev-libs/boost-1.34.1")"
++	BOOST_VER="$(get_version_component_range 1-2 "${BOOST_PKG/*boost-/}")"
++	BOOST_VER="$(replace_all_version_separators _ "${BOOST_VER}")"
++	BOOST_INC="/usr/include/boost-${BOOST_VER}"
++	BOOST_LIB="/usr/$(get_libdir)/boost-${BOOST_VER}"
++
+ 	append-ldflags -pthread
+ 
+ 	#use multi-threading versions of boost libs
+@@ -53,6 +59,8 @@
+ 		--with-zlib=system \
+ 		--with-asio=system \
+ 		${LOGGING} \
++		--with-boost=${BOOST_INC} \
++		--with-boost-libdir=${BOOST_LIB} \
+ 		${BOOST_LIBS}
+ }
+ 
