@@ -1,0 +1,20 @@
+diff -rupN a/cegui/CEGUI-OGRE.pc.in b/cegui/CEGUI-OGRE.pc.in
+--- a/cegui/CEGUI-OGRE.pc.in	2009-10-16 00:46:37.000000000 +1100
++++ b/cegui/CEGUI-OGRE.pc.in	2009-11-06 14:42:27.000000000 +1100
+@@ -7,5 +7,5 @@ datafiles=@datarootdir@/@PACKAGE@
+ Name: CEGUI Ogre Renderer
+ Description: Ogre based renderer module for CEGUI.
+ Version: @VERSION@
+-Requires: OGRE >= 1.6.0,CEGUI = @VERSION@
++Requires: OGRE >= 1.6.0,CEGUI-@VERSION@ = @VERSION@
+ Libs: -lCEGUIOgreRenderer@cegui_bsfx@
+diff -rupN a/cegui/CEGUI-OPENGL.pc.in b/cegui/CEGUI-OPENGL.pc.in
+--- a/cegui/CEGUI-OPENGL.pc.in	2009-10-16 00:46:37.000000000 +1100
++++ b/cegui/CEGUI-OPENGL.pc.in	2009-11-06 14:42:45.000000000 +1100
+@@ -7,5 +7,5 @@ datafiles=@datarootdir@/@PACKAGE@
+ Name: CEGUI OpenGL Renderer
+ Description: OpenGL based renderer module for CEGUI.
+ Version: @VERSION@
+-Requires: CEGUI = @VERSION@
++Requires: CEGUI-@VERSION@ = @VERSION@
+ Libs: -lCEGUIOpenGLRenderer@cegui_bsfx@

@@ -1,0 +1,11 @@
+--- ati.py.orig	2009-04-16 21:30:54.000000000 +0400
++++ ati.py	2010-04-23 09:34:17.509053596 +0400
+@@ -28,7 +28,7 @@
+ import math
+ 
+ dirs=['/bin', '/usr/bin', '/usr/local/bin', '/sbin', '/usr/sbin',
+-  '/usr/local/sbin']
++  '/usr/local/sbin', '/opt/bin']
+ 
+ class AtiInfo:
+   def __init__(self):

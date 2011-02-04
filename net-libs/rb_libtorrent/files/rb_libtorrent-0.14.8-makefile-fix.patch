@@ -1,0 +1,26 @@
+diff --git a/bindings/python/setup.py.in b/bindings/python/setup.py.in
+index be61fe7..77693a4 100644
+--- a/bindings/python/setup.py.in
++++ b/bindings/python/setup.py.in
+@@ -62,7 +62,7 @@ if "OPT" in config_vars and "-Wstrict-prototypes" in config_vars["OPT"]:
+ source_list = os.listdir(os.path.join(os.path.dirname(__file__), "src"))
+ source_list = [os.path.join("src", s) for s in source_list if s.endswith(".cpp")]
+ 
+-extra_cmd = '@COMPILETIME_OPTIONS@ @CPPFLAGS@ @LIBS@ @BOOST_FILESYSTEM_LIB@ @BOOST_THREAD_LIB@ @PTHREAD_LIBS@ @SSL_LIBS@ @BOOST_SYSTEM_LIB@ @SSL_LDFLAGS@ @SSL_CXXFLAGS@'
++extra_cmd = '@COMPILETIME_OPTIONS@ @CPPFLAGS@ @LIBS@ @BOOST_LDFLAGS@ @BOOST_FILESYSTEM_LIB@ @BOOST_THREAD_LIB@ @PTHREAD_LIBS@ @SSL_LIBS@ @BOOST_SYSTEM_LIB@ @SSL_LDFLAGS@ @SSL_CXXFLAGS@'
+ 
+ setup( name='python-libtorrent',
+ 	version='@PACKAGE_VERSION@',
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 62e802a..1b152ba 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -108,7 +108,7 @@ $(top_srcdir)/include/libtorrent/variant_stream.hpp \
+ $(top_srcdir)/include/libtorrent/version.hpp
+ 
+ 
+-libtorrent_rasterbar_la_LDFLAGS = $(LDFLAGS) -version-info $(INTERFACE_VERSION_INFO)
++libtorrent_rasterbar_la_LDFLAGS = $(LDFLAGS) -version-info $(INTERFACE_VERSION_INFO) @BOOST_LDFLAGS@
+ libtorrent_rasterbar_la_LIBADD = @ZLIB@ @BOOST_SYSTEM_LIB@ @BOOST_FILESYSTEM_LIB@ @BOOST_THREAD_LIB@ @PTHREAD_LIBS@ @SSL_LIBS@
+ 
+ AM_CXXFLAGS= -ftemplate-depth-100 -I$(top_srcdir)/include -I$(top_srcdir)/include/libtorrent @ZLIBINCL@ @DEBUGFLAGS@ @PTHREAD_CFLAGS@ -DBOOST_MULTI_INDEX_DISABLE_SERIALIZATION @SSL_CXXFLAGS@
