@@ -1,0 +1,161 @@
+ src/configure.ac |    7 +++++++
+ src/smcroute.c   |   46 +++++++++++++++++++++++++++++++++++++---------
+ 2 files changed, 44 insertions(+), 9 deletions(-)
+
+diff --git a/src/configure.ac b/src/configure.ac
+index fcf1b7c..c69d3c8 100644
+--- a/src/configure.ac
++++ b/src/configure.ac
+@@ -89,4 +89,11 @@ AC_FUNC_SELECT_ARGTYPES
+ AC_FUNC_SETPGRP
+ AC_CHECK_FUNCS([atexit dup2 memset select socket strchr strerror strrchr])
+ 
++AC_ARG_WITH([pidfile], 
++            [AS_HELP_STRING([--with-pidfile], [pidfile])],
++            [AC_DEFINE_UNQUOTED(PIDFILE, "$with_pidfile", [pidfile])],
++            [AC_DEFINE(PIDFILE, ["/var/run/smcroute.pid"], [pidfile])])
++
++AC_SUBST(PIDFILE)
++
+ AC_OUTPUT
+diff --git a/src/smcroute.c b/src/smcroute.c
+index e34cb3e..da884d3 100644
+--- a/src/smcroute.c
++++ b/src/smcroute.c
+@@ -65,6 +65,7 @@ int McGroupSock4 = -1;
+ int McGroupSock6 = -1;
+ 
+ int do_debug_logging = 0;
++int enable_ipv6 = 0;
+ 
+ static int getArgOptLn( const char *ArgVc[] )
+ /*
+@@ -165,7 +166,7 @@ static int initMRouter6()
+   return 0;
+ }
+ 
+-void ServerLoop(void)
++pid_t ServerLoop(void)
+ {
+   uint8 Bu[ MX_CMDPKT_SZ ];
+   int IpcServerFD;
+@@ -186,7 +187,7 @@ void ServerLoop(void)
+   if (initMRouter4() == 0)
+     initialized_api_count++;
+ 
+-  if (initMRouter6() == 0)
++  if(enable_ipv6 && (initMRouter6() == 0))
+     initialized_api_count++;
+ 
+   /* At least one API (IPv4 or IPv6) must have initialized successfully
+@@ -205,7 +206,8 @@ void ServerLoop(void)
+ 
+   /* creat daemon process
+    */
+-  if( ! fork() ) {                   /* only daemon enters */
++  pid_t pid = fork();
++  if( ! pid ) {                   /* only daemon enters */
+     atexit( clean );
+ 
+     /* Detach deamon from terminal */
+@@ -221,13 +223,18 @@ void ServerLoop(void)
+       /* watch the MRouter and the IPC socket to the smcroute client */
+       {
+ 	fd_set ReadFDS;
+-	int MaxFD = MAX( IpcServerFD, MAX( MRouterFD4, MRouterFD6 ) );
++	int MaxFD = MRouterFD4;
++        if(enable_ipv6)
++          MaxFD = MAX(MaxFD, MRouterFD6);
++	MaxFD = MAX( IpcServerFD, MaxFD );
++
+ 	int Rt;
+ 
+ 	FD_ZERO( &ReadFDS );
+ 	FD_SET( IpcServerFD, &ReadFDS );
+ 	FD_SET( MRouterFD4, &ReadFDS );
+-	FD_SET( MRouterFD6, &ReadFDS );
++        if(enable_ipv6)
++          FD_SET( MRouterFD6, &ReadFDS );
+ 
+ 	/* wait for input */
+ 	Rt = select( MaxFD +1, &ReadFDS, NULL, NULL, NULL );
+@@ -254,7 +261,7 @@ void ServerLoop(void)
+ 	 * Receive and drop ICMPv6 stuff. This is either MLD packets
+ 	 * or upcall messages sent up from the kernel.
+ 	 */
+-	if( FD_ISSET( MRouterFD6, &ReadFDS ) ) {
++	if( enable_ipv6 && FD_ISSET( MRouterFD6, &ReadFDS ) ) {
+ 	  char Bu[ 128 ];
+ 	    
+ 	  Rt = read( MRouterFD6, Bu, sizeof( Bu ) ); 
+@@ -369,6 +376,8 @@ void ServerLoop(void)
+       }
+     }
+   }
++
++  return pid;
+ }
+ 
+ int main( int ArgCn, const char *ArgVc[] )
+@@ -384,9 +393,10 @@ int main( int ArgCn, const char *ArgVc[] )
+   uint8 Bu[ MX_CMDPKT_SZ ];
+   int StartDaemon = 0;
+   int ProgRt = 0;
++  char *pidfile = PIDFILE;
+ 
+   /* init syslog */
+-  openlog( ArgVc[ 0 ], LOG_PID, LOG_DAEMON );   
++  openlog( PACKAGE_NAME, LOG_PID, LOG_DAEMON );   
+   
+   if( ArgCn <= 1 ) {
+ Usage:    
+@@ -456,6 +466,15 @@ BuildCmd:
+ 	Log2Stderr = LOG_DEBUG;
+ 	break;
+ 
++      case 'p':
++        if(OptLn != 2) {
++          fprintf(stderr, "pidfile requires argument");
++          goto Usage;
++        }
++
++        pidfile = strdup(*(ArgVc + 1));
++	break;
++
+       case 'd':                 /* daemon */
+ 	StartDaemon = 1;
+ 	break;
+@@ -464,6 +483,10 @@ BuildCmd:
+         do_debug_logging = 1;
+         break;
+ 
++      case '6':
++        enable_ipv6 = 1;
++        break;
++
+       default:                  /* unknown option */
+ 	fprintf( stderr, "unknown option: %s\n", *ArgVc );
+ 	goto Usage;
+@@ -472,7 +495,12 @@ BuildCmd:
+   }
+ 
+   if( StartDaemon ) {                       /* only daemon parent enters */
+-    ServerLoop();
++    pid_t pid = ServerLoop();
++    if(pidfile) {
++      FILE *_pf = fopen(pidfile, "w");
++      fprintf(_pf, "%d\n", pid);
++      fclose(_pf);
++    }
+   }
+ 
+   /* Client or daemon parent only, the daemon never reaches this point */
+@@ -481,7 +509,7 @@ BuildCmd:
+   if( CmdVcPt > CmdVc ) {        
+     struct CmdPkt **PktPp; 
+ 
+-    openlog( ArgVc[ 0 ], LOG_PID, LOG_USER );
++    openlog( PACKAGE_NAME, LOG_PID, LOG_USER );
+ 
+     /* connect to daemon */
+     {
