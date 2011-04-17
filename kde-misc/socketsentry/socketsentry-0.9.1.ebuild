@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="3"
 NEED_KDE="4.3"
 
 inherit cmake-utils qt4 kde4-base flag-o-matic

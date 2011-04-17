@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="3"
 NEED_KDE="4.4"
 KDE_LINGUAS="en_GB et ga pt pt_BR sv uk"
 
@@ -14,7 +14,7 @@ SRC_URI="http://www.v13.gr/files/${PN}/${P}.tar.bz2"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 RDEPEND="
 	dev-python/pyqwt
