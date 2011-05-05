@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="hdd sensor"
 
-DEPEND="~app-admin/conky-1.8.0
+DEPEND="~app-admin/conky-1.8.0[X,curl,imlib,lua,lua-cairo,lua-imlib,ncurses]
 		dev-python/pystatgrab
 		media-fonts/droid
 		hdd? ( app-admin/hddtemp )
