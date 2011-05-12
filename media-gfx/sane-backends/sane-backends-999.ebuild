@@ -165,6 +165,9 @@ src_compile() {
 	if use sane_backends_mustek_pp; then
 		myconf="${myconf} --enable-parport-directio"
 	fi
+	if use sane_backends_mustek_usb2; then
+		myconf="${myconf} --enable-pthread"
+	fi
 	SANEI_JPEG="sanei_jpeg.o" SANEI_JPEG_LO="sanei_jpeg.lo" \
 	BACKENDS="${BACKENDS}" econf \
 		$(use_with gphoto2) \
