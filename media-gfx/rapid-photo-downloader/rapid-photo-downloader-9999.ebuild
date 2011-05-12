@@ -1,6 +1,8 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+EAPI="3"
+
 inherit distutils bzr
 
 EBZR_REPO_URI="https://code.launchpad.net/~dlynch3/rapid/trunk"
