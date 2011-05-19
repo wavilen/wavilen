@@ -15,11 +15,13 @@ IUSE="hdd sensor"
 
 DEPEND="~app-admin/conky-1.8.0[X,curl,imlib,lua,lua-cairo,lua-imlib,ncurses]
 		dev-python/pystatgrab
+		net-misc/curl
+		"
+RDEPEND="${DEPEND}
 		media-fonts/droid
 		hdd? ( app-admin/hddtemp )
-		net-misc/curl
-		sensor? ( sys-apps/lm_sensors )"
-RDEPEND="${DEPEND}"
+		sensor? ( sys-apps/lm_sensors )
+		"
 
 S=${WORKDIR}/${PN/-/_}
 
@@ -29,7 +31,7 @@ src_prepare() {
 }
 
 src_install() {
-    emake DESTDIR="${D}" install || die "Install failed"
+		emake DESTDIR="${D}" install || die "Install failed"
 }
 
 pkg_postinst() {

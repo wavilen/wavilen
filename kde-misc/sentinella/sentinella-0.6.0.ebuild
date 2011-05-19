@@ -9,7 +9,7 @@ inherit cmake-utils
 
 KDEAPPS_ID="118356"
 MY_PN="Sentinella"
-DESCRIPTION="Sentinella monitors your system activity and, when a condition is met, takes an action that you\'ve chosen."
+DESCRIPTION="Sentinella monitors your system activity and, when a condition is met, takes an action."
 HOMEPAGE="http://www.kde-apps.org/content/show.php?content=${KDEAPPS_ID}"
 SRC_URI="http://prdownloads.sourceforge.net/${PN}/${MY_PN}-${PV}.tar.gz"
 S="${WORKDIR}/${MY_PN}-${PV}"

@@ -1,7 +1,7 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-inherit distutils
+EAPI="3"
 
 DESCRIPTION="Import your images efficiently and reliably"
 HOMEPAGE="http://damonlynch.net/rapid/"
@@ -13,11 +13,11 @@ KEYWORDS="~amd64 ~x86"
 IUSE="video"
 
 RDEPEND=">=dev-lang/python-2.5
-         >=dev-python/gnome-python-2.18
-         >=dev-python/pygtk-2.12
-         >=media-gfx/pyexiv2-0.2.0
-         dev-python/notify-python
-         video? ( dev-python/kaa-metadata )"
+		>=dev-python/gnome-python-2.18
+		>=dev-python/pygtk-2.12
+		>=media-gfx/pyexiv2-0.2.0
+		dev-python/notify-python
+		video? ( dev-python/kaa-metadata )"
 
 DEPEND="${RDEPEND}"
 
