@@ -26,8 +26,7 @@ RDEPEND="${DEPEND}
 S=${WORKDIR}/${PN/-/_}
 
 src_prepare() {
-		sed -i -e "s:CFLAGS=-Wall -std=c99:CFLAGS=-Wall -std=c99 ${CFLAGS}:" Makefile || die
-		"sed fix failed. Uh-oh..."
+		sed -i -e "s:CFLAGS=-Wall -std=c99:& ${CFLAGS}:" Makefile || die "sed fix failed. Uh-oh..."
 }
 
 src_install() {
