@@ -18,6 +18,7 @@ DEPEND="~app-admin/conky-1.8.1[X,curl,imlib,lua,lua-cairo,lua-imlib,ncurses]
 		net-misc/curl
 		"
 RDEPEND="${DEPEND}
+		media-fonts/ubuntu-font-family
 		media-fonts/droid
 		hdd? ( app-admin/hddtemp )
 		sensor? ( sys-apps/lm_sensors )
