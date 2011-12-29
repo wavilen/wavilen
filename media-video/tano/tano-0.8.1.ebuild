@@ -4,18 +4,19 @@
 
 EAPI=3
 
-inherit cmake-utils eutils git versionator
+inherit cmake-utils eutils #versionator git
 
-C_PV=$(get_version_component_range 1-2)
+#C_PV=$(get_version_component_range 1-2)
 DESCRIPTION="Tano can play almost every multimedia file, including SD and HD IP
 Television channels"
 HOMEPAGE="http://tano.si/"
-EGIT_REPO_URI="git://github.com/ntadej/tano"
-EGIT_BRANCH="$C_PV"
-EGIT_COMMIT="$PV"
+#EGIT_REPO_URI="git://github.com/ntadej/tano"
+#EGIT_BRANCH="$C_PV"
+#EGIT_COMMIT="$PV"
 
 
 #SRC_URI="mirror://sourceforge/${PN}/Tano%20Player/${PV}/${P/-/_}_src.tar.gz"
+SRC_URI="https://github.com/ntadej/${PN}/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -24,6 +25,9 @@ IUSE=""
 
 DEPEND="media-libs/libvlc-qt"
 RDEPEND="${DEPEND}"
+
+S="${WORKDIR}/ntadej-tano-78a3b67"
+
 
 src_install()
 {
