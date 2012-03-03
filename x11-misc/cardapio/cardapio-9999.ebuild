@@ -18,8 +18,10 @@ IUSE="all +stand-alone gnomepanel docky awn gnomeshell"
 DEPEND="
 	dev-python/pygtk
 	x11-misc/xdg-user-dirs-gtk
+	dev-libs/keybinder[python]
+	gnome-base/gnome-menus[python]
+	dev-python/gnome-applets-python
 	gnomepanel? ( 
-		dev-python/gnome-applets-python
 		gnome-base/gnome-control-center
 		)
 	docky? (
