@@ -2,10 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=3
 inherit mercurial python
 
 PYTHON_DEPEND="2"
-EAPI=3
 
 DESCRIPTION="PyTyle is an on-demand automatic and manual tiling manager"
 HOMEPAGE="http://code.google.com/p/pytyle/"
