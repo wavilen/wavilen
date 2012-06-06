@@ -28,8 +28,15 @@ IUSE=""
 DEPEND="media-libs/libvlc-qt"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${PN}-1.0~git20120503~beta1"
+#S="${WORKDIR}/${PN}-1.0~git20120503~beta1"
 
+src_unpack() {
+	unpack ${A}
+	S=`dirname ${WORKDIR}/*/CMakeLists.txt`
+	pwd
+	cd ${S}
+	pwd
+}
 
 src_install()
 {

@@ -36,11 +36,11 @@ if [[ ${PV} == "9999" ]] ; then
 
 	# autogen.sh does more than just run autotools
 if [[ ${PV} == "9999" ]] ; then
+#			-e '/^\(auto\|ac\)/s:^:e:' \
 sed -i \
-			-e '/^\(auto\|ac\)/s:^:e:' \
 			-e "s:^eautomake:`which automake`:" \
 			autogen.sh
-		(. ./autogen.sh) || die
+		(./autogen.sh) || die
 fi
 }
 
@@ -57,7 +57,7 @@ src_compile() {
                 $(use debug && echo --enable-mm-debug) \
 		$(use_enable debug grub-fstest) \
                 $(use_enable debug grub-emu-usb) 
-	emake || die "making regular stuff"
+	emake -j1 || die "making regular stuff"
 }
 
 src_install() {
@@ -73,7 +73,7 @@ setup_boot_dir() {
 	local dir=${boot_dir}/burg
 
 	if [[ ! -e ${dir}/burg.cfg ]] ; then
-		burg-mkconfig -o "${dir}/burg.cfg"
+	    einfo "To generate config running: burg-mkconfig -o \"${dir}/burg.cfg\""
 	fi
 
 	#local install=burg-install
