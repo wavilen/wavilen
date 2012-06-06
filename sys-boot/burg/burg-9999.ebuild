@@ -36,11 +36,19 @@ if [[ ${PV} == "9999" ]] ; then
 
 	# autogen.sh does more than just run autotools
 if [[ ${PV} == "9999" ]] ; then
+#sed -i \
 #			-e '/^\(auto\|ac\)/s:^:e:' \
-sed -i \
-			-e "s:^eautomake:`which automake`:" \
-			autogen.sh
-		(./autogen.sh) || die
+#			-e "s:^eautomake:`which automake`:" \
+#			autogen.sh
+	eaclocal || die
+	eautoconf || die
+	eautoheader || die
+	sed -i \
+		-e 's/^aclocal.*/#&/' \
+		-e 's/^autoconf.*/#&/' \
+		-e 's/^autoheader.*/#&/' \
+		autogen.sh
+	(./autogen.sh) || die
 fi
 }
 
