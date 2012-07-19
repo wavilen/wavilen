@@ -122,6 +122,8 @@ DEPEND="${RDEPEND}
 RDEPEND="${RDEPEND}
 	!<sys-fs/udev-114"
 
+RESTRICT="mirror"
+FEATURES="digest"
 DATE=`date +%Y%m%d`
 #DATE="20111001"
 SRC_URI="http://www.sane-project.org/snapshots/${PN}-git${DATE}.tar.gz"
