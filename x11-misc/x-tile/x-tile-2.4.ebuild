@@ -15,9 +15,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=""
+DEPEND="dev-python/setuptools"
 RDEPEND="${DEPEND}
-		dev-python/setuptools"
+		dev-python/gconf-python"
 
 src_prepare() {
 	distutils_src_prepare
