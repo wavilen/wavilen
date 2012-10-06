@@ -14,7 +14,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~ppc x86 ~x86-fbsd"
-IUSE="doc compiz"
+IUSE="doc compiz awesome urxvt"
 
 DEPEND="doc? ( sys-apps/texinfo )
 		compiz? ( x11-wm/compiz )
@@ -27,9 +27,13 @@ pkg_setup() {
 }
 
 src_prepare() {
-	use compiz && ( epatch "${FILESDIR}/menumaker.patch" && echo "Patch OK";
+	use compiz && ( sed -i "/fronts = {/r ${FILESDIR}/compiz.inc" ${S}/MenuMaker/__init__.py && einfo "Include OK";
 	cp "${FILESDIR}/Compiz.py" "${S}/MenuMaker/";
 	cp "${FILESDIR}/MyGTKMenu.py" "${S}/MenuMaker/" )
+	use awesome && ( sed -i "/fronts = {/r ${FILESDIR}/awesome.inc" ${S}/MenuMaker/__init__.py && einfo "Include OK";
+	cp "${FILESDIR}/Awesome.py"  "${S}/MenuMaker/" )
+	use urxvt && ( sed -i 's/(T.xvt, KwS("Rxvt", "Xvt"/&, "Urxvt"/' ${S}/MenuMaker/__init__.py; 
+	sed -i 's/exes \= \["rxvt", "xvt"/&, "urxvt"/' ${S}/Prophet/Legacy/Shell.py ) 
 }
 
 src_configure() {
