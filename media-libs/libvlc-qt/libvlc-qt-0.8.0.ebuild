@@ -17,7 +17,8 @@ SRC_URI="http://download.tano.si/${PN/lib/}/${PV}/${PN}_${PV}_src.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+#KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND="
