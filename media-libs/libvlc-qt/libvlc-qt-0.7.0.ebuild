@@ -23,7 +23,7 @@ IUSE=""
 DEPEND="
    app-doc/doxygen
    >=x11-libs/qt-core-4.6
-   media-video/vlc
+   <=media-video/vlc-2.0.3
 "
 RDEPEND="${DEPEND}"
 

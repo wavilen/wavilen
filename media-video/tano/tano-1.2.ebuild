@@ -22,7 +22,8 @@ SRC_URI="mirror://sourceforge/${PN}/Tano%20Player/${PV}/${P/-/_}_src.tar.gz
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+#KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND=">=media-libs/libvlc-qt-0.6.1"
