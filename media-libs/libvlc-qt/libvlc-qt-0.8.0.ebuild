@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=5
 
 inherit cmake-utils 
 
@@ -17,14 +17,14 @@ SRC_URI="http://download.tano.si/${PN/lib/}/${PV}/${PN}_${PV}_src.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-#KEYWORDS="~amd64 ~x86"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
+MAKEOPTS="-j1"
 
 DEPEND="
    app-doc/doxygen
-   >=x11-libs/qt-core-4.6
-   media-video/vlc
+   >=dev-qt/qtcore-4.8
+   <media-video/vlc-2.0.5
 "
 RDEPEND="${DEPEND}"
 
