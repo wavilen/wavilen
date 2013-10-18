@@ -4,7 +4,7 @@
 
 EAPI=4
 
-inherit git
+inherit git-r3
 
 DESCRIPTION="Dana's composite manager (not for production use)"
 HOMEPAGE="http://git.openbox.org/?p=dana/dcompmgr.git;a=summary"
