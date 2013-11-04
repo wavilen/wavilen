@@ -4,29 +4,35 @@
 
 EAPI=3
 
+inherit git-r3
+
 DESCRIPTION="CONKY-colors is an easier way to configure Conky."
 HOMEPAGE="http://gnome-look.org/content/show.php/CONKY-colors?content=92328"
-SRC_URI="http://gnome-look.org/CONTENT/content-files/92328-conky_colors-5.0.tar.gz"
+#SRC_URI="http://www.deviantart.com/download/244793180/conky_colors_by_helmuthdu-d41qrmk.zip"
+EGIT_REPO_URI="https://github.com/helmuthdu/conky_colors.git"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="hdd sensor"
+IUSE="hddtemp sensors"
 
-DEPEND="~app-admin/conky-1.8.0[X,curl,imlib,lua,lua-cairo,lua-imlib,ncurses]
+DEPEND="~app-admin/conky-1.9.0[X,curl,imlib,lua,lua-cairo,lua-imlib,ncurses]
 		dev-python/pystatgrab
 		net-misc/curl
 		"
 RDEPEND="${DEPEND}
+		media-fonts/ubuntu-font-family
 		media-fonts/droid
-		hdd? ( app-admin/hddtemp )
-		sensor? ( sys-apps/lm_sensors )
+		hddtemp? ( app-admin/hddtemp )
+		sensors? ( sys-apps/lm_sensors )
 		"
 
-S=${WORKDIR}/${PN/-/_}
+#S=${WORKDIR}/${PN/-/_}
 
 src_prepare() {
 		sed -i -e "s:CFLAGS=-Wall -std=c99:& ${CFLAGS}:" Makefile || die "sed fix failed. Uh-oh..."
+		sed -i -e "s:ln -fs \$(DESTDIR)/usr/share/conkycolors/bin/conkyTask /usr/bin/ct:ln -fs /usr/share/conkycolors/bin/conkyTask \$(DESTDIR)/usr/bin/ct:" Makefile || die "sed fix failed. Uh-oh..."
+
 }
 
 src_install() {

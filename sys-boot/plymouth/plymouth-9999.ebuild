@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="2"
+EAPI="3"
 
-inherit autotools mount-boot git
+inherit autotools mount-boot git-r3
 
 DESCRIPTION="Graphical boot animation (splash) and logger"
 HOMEPAGE="http://cgit.freedesktop.org/plymouth/"
