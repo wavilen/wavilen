@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=3
-inherit git-r3
+inherit git-2
 
 DESCRIPTION="desktop menu for compiz"
 HOMEPAGE="http://cgit.compiz.org/~crdlb/compiz-deskmenu/"
