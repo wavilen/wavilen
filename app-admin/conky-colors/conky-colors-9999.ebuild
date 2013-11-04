@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit git-r3
+inherit git-2
 
 DESCRIPTION="CONKY-colors is an easier way to configure Conky."
 HOMEPAGE="http://gnome-look.org/content/show.php/CONKY-colors?content=92328"

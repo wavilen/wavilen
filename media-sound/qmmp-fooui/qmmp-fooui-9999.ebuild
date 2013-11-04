@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-inherit git-r3 qt4-r2
+inherit git-2 qt4-r2
 
 DESCRIPTION="Foobar-like interface for qmmp"
 HOMEPAGE="http://gitorious.org/qmmp-fooui"
@@ -29,7 +29,7 @@ src_prepare() {
 }
 
 src_unpack() {
-	git-r3_src_unpack
+	git-2_src_unpack
 }
 
 src_install() {

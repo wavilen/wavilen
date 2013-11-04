@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit cmake-utils eutils git-r3
+inherit cmake-utils eutils git-2
 
 DESCRIPTION="Tano can play almost every multimedia file, including SD and HD IP
 Television channels"

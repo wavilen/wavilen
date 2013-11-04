@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit git-r3
+inherit git-2
 
 DESCRIPTION="xicursorset - set cursor image for an XInput2 pointer"
 HOMEPAGE="http://git.ao2.it/xicursorset.git/"
