@@ -4,7 +4,7 @@
 
 EAPI="3"
 
-inherit git qt4-r2
+inherit git-r3 qt4-r2
 
 DESCRIPTION="Foobar-like interface for qmmp"
 HOMEPAGE="http://gitorious.org/qmmp-fooui"
@@ -25,11 +25,11 @@ src_prepare() {
 	qt4-r2_src_prepare
 	# fix translations directory
 	einfo "Fixing LINGUAS path"
-	sed -i "s/\:\/translations/\/usr\/share\/${PN}\/languages/" main.cpp
+	sed -i "s/\:\/translations/\/usr\/share\/${PN}\/languages/" src/main.cpp
 }
 
 src_unpack() {
-	git_src_unpack
+	git-r3_src_unpack
 }
 
 src_install() {

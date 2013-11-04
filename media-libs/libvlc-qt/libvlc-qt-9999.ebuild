@@ -4,7 +4,7 @@
 
 EAPI=3
 
-inherit cmake-utils git
+inherit cmake-utils git-r3
 
 DESCRIPTION="VLC-Qt is a free library used to connect Qt and libvlc libraries."
 HOMEPAGE="http://tano.si/en/vlc-qt"

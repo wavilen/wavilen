@@ -3,12 +3,12 @@
 # $Header: $
 
 EAPI=3
-inherit git
+inherit git-r3
 
 DESCRIPTION="desktop menu for compiz"
 HOMEPAGE="http://cgit.compiz.org/~crdlb/compiz-deskmenu/"
 #SRC_URI=""
-EGIT_REPO_URI="git://anongit.compiz-fusion.org/users/crdlb/compiz-deskmenu"
+EGIT_REPO_URI="git://anongit.compiz.org/users/crdlb/compiz-deskmenu"
 
 LICENSE=""
 SLOT="0"
