@@ -31,7 +31,7 @@ RDEPEND="${DEPEND}
 
 src_prepare() {
 		sed -i -e "s:CFLAGS=-Wall -std=c99:& ${CFLAGS}:" Makefile || die "sed fix failed. Uh-oh..."
-		sed -i -e "s:ln -fs \$(DESTDIR)/usr/share/conkycolors/bin/conkyTask /usr/bin/ct:ln -fs /usr/share/conkycolors/bin/conkyTask \$(DESTDIR)/usr/bin/ct:" Makefile || die "sed fix failed. Uh-oh..."
+		sed -i -e "s:ln -fs \$(DESTDIR)/share/conkycolors/bin/conkyTask \$(DESTDIR)/usr/bin/ct:ln -fs /usr/share/conkycolors/bin/conkyTask \$(DESTDIR)/usr/share/conkycolors/bin/conkyTask:" Makefile || die "sed fix failed. Uh-oh..."
 
 }
 
