@@ -1,11 +1,12 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
+PLOCALES="cs de es_AR fr it pl ru zh_CN zh_TW"
 
-PYTHON_COMPAT=( python2_7 )
-inherit distutils-r1
+PYTHON_COMPAT=( python{2_6,2_7})
+inherit distutils-r1 l10n
 
 DESCRIPTION="X-tile is an application that allows you to select a number of
 windows and tile them in different ways."
@@ -16,29 +17,20 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-LANGS="cs de es_AR fr it pl ru zh_CN zh_TW"
-
-for lang in ${LANGS}; do
-        IUSE+=" linguas_${lang}"
-done
-
 
 DEPEND="dev-python/setuptools"
 RDEPEND="${DEPEND}
 		dev-python/gconf-python"
 
 src_prepare() {
-	einfo "Cleaning up locales..."
+	einfo "Cleaning unused locales..."
 	xtile_langs=$(grep -E "AVAILABLE_LANGS *=" modules/cons.py) || die
 	xtile_langs_original=$(echo $xtile_langs |  sed -e 's/[]\/$*.^|[]/\\&/g')
-	for lang in ${LANGS}; do
-		use "linguas_${lang}" && {
-			einfo "- keeping ${lang}"
-			continue
-		}
-		rm locale/"${lang}.po" || die
-		xtile_langs=${xtile_langs/", '$lang'"/}
-	done
+	rem_locale() {
+		rm "locale/${1}.po" || die
+		xtile_langs=${xtile_langs/", '${1}'"/}
+	}
+	l10n_for_each_disabled_locale_do rem_locale
 	sed -i "s/$xtile_langs_original/$xtile_langs/g" modules/cons.py
 	distutils-r1_src_prepare
 }
